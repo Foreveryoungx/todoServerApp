@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const morgan = require('morgan');
 const mongoString = process.env.DB;
+const cors = require("cors");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -34,6 +35,11 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(
+    cors({
+      origin: "*",
+    })
+);
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
